@@ -31,8 +31,9 @@ Le TP7 a pour objectif de faire évoluer l'application de salle d'attente partag
 3. **Contrôle d'accès et séparation stricte des privilèges dans l'interface** :
    - L'**Agent** dispose des privilèges complets : vue globale de la file, ajout de n'importe quel client, appel du prochain client (*Next Client*), et suppression de clients.
    - Le **Client** bénéficie d'une interface adaptée : une bannière personnalisée lui indique sa position exacte dans la file (*« Vous êtes dans la file : Position #2 sur 6 »*), un bouton en 1-clic lui permet de rejoindre la file, tandis que les actions d'administration (*Next Client* et suppression d'autres clients) lui sont **strictement interdites et désactivées**.
-4. **Mode Démo & Résilience Hors-Ligne** :
-   - Intégration de raccourcis démo (*« Agent (Dr) »* et *« Client (Patient) »*) permettant de tester et présenter instantanément l'application sans dépendre de l'envoi d'emails de confirmation.
+4. **Interface d'Authentification Épurée et Professionnelle** :
+   - Formulaire d'authentification soigné Material 3, sans éléments superflus de débogage, avec validation stricte des champs (email, mot de passe, nom et sélection de rôle).
+   - Gestion claire des messages d'erreur et explications adaptées aux retours de Supabase.
 5. **Compréhension de la notion optionnelle Multi-Tenant** :
    - Analyse et documentation de l'architecture multi-locataire (isolation des files par cabinet/organisation via un `tenant_id` et des politiques Supabase Row Level Security).
 

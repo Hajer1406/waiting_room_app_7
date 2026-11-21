@@ -28,7 +28,7 @@ void main() {
       authService.dispose();
     });
 
-    testWidgets('Renders login screen with Connexion and Inscription options',
+    testWidgets('Renders professional login screen with Connexion and Inscription options',
         (WidgetTester tester) async {
       await tester.pumpWidget(_buildTestLoginScreen(authProvider));
       await tester.pumpAndSettle();
@@ -37,8 +37,6 @@ void main() {
       expect(find.text('Connexion'), findsOneWidget);
       expect(find.text('Inscription'), findsOneWidget);
       expect(find.text('Se connecter'), findsOneWidget);
-      expect(find.text('Agent (Dr)'), findsOneWidget);
-      expect(find.text('Client (Patient)'), findsOneWidget);
     });
 
     testWidgets('Switching to Inscription shows Name field and Role chips',
@@ -57,17 +55,26 @@ void main() {
       expect(find.text('Créer mon compte'), findsOneWidget);
     });
 
-    testWidgets('Tapping Demo Agent button logs in as staff',
+    testWidgets('Entering credentials and submitting logs in user',
         (WidgetTester tester) async {
       await tester.pumpWidget(_buildTestLoginScreen(authProvider));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('Agent (Dr)'));
+      // Enter email and password
+      await tester.enterText(
+        find.widgetWithText(TextFormField, 'Email'),
+        'agent@hospital.com',
+      );
+      await tester.enterText(
+        find.widgetWithText(TextFormField, 'Mot de passe'),
+        'password123',
+      );
+      await tester.tap(find.text('Se connecter'));
       await tester.pumpAndSettle();
 
       expect(authProvider.isAuthenticated, isTrue);
       expect(authProvider.isStaff, isTrue);
-      expect(authProvider.user?.name, 'Dr. Martin');
+      expect(authProvider.user?.email, 'agent@hospital.com');
     });
   });
 }

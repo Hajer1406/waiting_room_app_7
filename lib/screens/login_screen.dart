@@ -257,47 +257,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: const TextStyle(fontSize: 16),
                               ),
                       ),
-
-                      const SizedBox(height: 24),
-                      const Divider(),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Accès rapide (Démonstration)',
-                        textAlign: TextAlign.center,
-                        style: theme.textTheme.labelMedium?.copyWith(
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              icon: const Icon(Icons.local_hospital_outlined, size: 18),
-                              label: const Text('Agent (Dr)'),
-                              onPressed: auth.isLoading
-                                  ? null
-                                  : () => auth.signInAsDemo(
-                                        name: 'Dr. Martin',
-                                        role: UserRole.staff,
-                                      ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              icon: const Icon(Icons.person_outline, size: 18),
-                              label: const Text('Client (Patient)'),
-                              onPressed: auth.isLoading
-                                  ? null
-                                  : () => auth.signInAsDemo(
-                                        name: 'Patient Sarah',
-                                        role: UserRole.client,
-                                      ),
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
