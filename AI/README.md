@@ -12,6 +12,7 @@ Ce répertoire regroupe la documentation relative à l'utilisation de l'intellig
 | **Workshop 4** | Synchronisation temps réel avec Supabase | Antigravity (Google DeepMind) | Gemini 3.8 Flash (High) | 15-16/10/2026 | [TP4_AI.md](file:///c:/Users/user/waiting_room_app/AI/TP4_AI.md) | [TP4_AI.docx](file:///c:/Users/user/waiting_room_app/AI/TP4_AI.docx) |
 | **Workshop 5** | Architecture Offline-First & Géolocalisation GPS | Antigravity (Google DeepMind) | Claude Sonnet 4.6 & Gemini 3.8 Flash | 31/10/2026 | [TP5_AI.md](file:///c:/Users/user/waiting_room_app/AI/TP5_AI.md) | [TP5_AI_Complet.docx](file:///c:/Users/user/waiting_room_app/AI/TP5_AI_Complet.docx) |
 | **Workshop 6** | File d'attente résiliente, Offline, Sync & Pagination | Antigravity (Google DeepMind) | Gemini 3.8 Flash & Claude Sonnet 4.6 (Thinking) | 10/11/2026 | [TP6_AI.md](file:///c:/Users/user/waiting_room_app/AI/TP6_AI.md) | [TP6_AI.docx](file:///c:/Users/user/waiting_room_app/AI/TP6_AI.docx) |
+| **Workshop 7** | Gestion Multi-Utilisateur, Authentification & Rôles RBAC | Antigravity (Google DeepMind) | Gemini 3.8 Flash & Claude Sonnet 4.6 (Thinking) | 21/11/2026 | [TP7_AI.md](file:///c:/Users/user/waiting_room_app/AI/TP7_AI.md) | [TP7_AI.docx](file:///c:/Users/user/waiting_room_app/AI/TP7_AI.docx) |
 
 ---
 
@@ -36,6 +37,11 @@ Ce répertoire regroupe la documentation relative à l'utilisation de l'intellig
    - Markdown : [**`AI/TP6_AI.md`**](file:///c:/Users/user/waiting_room_app/AI/TP6_AI.md)
    - Fichier Word complet : [**`AI/TP6_AI.docx`**](file:///c:/Users/user/waiting_room_app/AI/TP6_AI.docx)
    - *Contenu* : Architecture en couches complète (UI, Providers, Services, Repository, Storage), distinction réseau/backend avec debouncing de 700ms (`ConnectivityProvider`), persistance SQLite et gestion d'état (`SyncStatus`), moteur de synchronisation asynchrone (`SyncService`), fonction RPC PostgreSQL Supabase `register_queue_client`, résolution de l'incompatibilité `sqflite` sur Chrome Web via fallback mémoire transparent, maintien de l'ordre FIFO de la file d'attente, réconciliation temps réel Supabase sans doublons et validation à 100% des 45 tests TDD automatisés.
+
+5. **Documents pour le Workshop 7** :
+   - Markdown : [**`AI/TP7_AI.md`**](file:///c:/Users/user/waiting_room_app/AI/TP7_AI.md)
+   - Fichier Word complet : [**`AI/TP7_AI.docx`**](file:///c:/Users/user/waiting_room_app/AI/TP7_AI.docx)
+   - *Contenu* : Transition vers une architecture multi-utilisateur sécurisée, authentification Supabase Auth (Email/Mot de passe), modèle `AppUser` et gestion des rôles RBAC (`UserRole.staff` vs `UserRole.client`), écran de connexion et inscription (`LoginScreen`), contrôle d'accès dans `QueueScreen` (verrouillage de `Next Client` pour les clients, bannière de position personnalisée, auto-inscription en 1-clic), boutons d'accès rapide Démo, explication approfondie de la notion multi-tenant, et 54/54 tests automatisés passés sans régression.
 
 ---
 
