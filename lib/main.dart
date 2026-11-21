@@ -3,10 +3,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'providers/auth_provider.dart';
 import 'providers/connectivity_provider.dart';
 import 'providers/queue_provider.dart';
 import 'repositories/queue_repository.dart';
+import 'screens/login_screen.dart';
 import 'screens/queue_screen.dart';
+import 'services/auth_service.dart';
 import 'services/connectivity_service.dart';
 import 'services/geolocation_service.dart';
 import 'services/sync_service.dart';
@@ -34,9 +37,6 @@ void main() async {
         anonKey: supabaseAnonKey,
       );
       supabaseClient = Supabase.instance.client;
-
-      // Attempt anonymous sign-in in the background (fire-and-forget)
-      supabaseClient.auth.signInAnonymously().ignore();
     } catch (e) {
       debugPrint('Supabase initialization error: $e');
     }
@@ -52,11 +52,15 @@ void main() async {
 
   final clientForConnectivity = supabaseClient;
   final connectivityService = ConnectivityService(clientForConnectivity);
+  final authService = AuthService(supabaseClient);
 
   runApp(
     MultiProvider(
       providers: [
         Provider<SyncService>.value(value: syncService),
+        ChangeNotifierProvider(
+          create: (_) => AuthProvider(authService),
+        ),
         ChangeNotifierProvider(
           create: (_) => ConnectivityProvider(connectivityService)..initialize(),
         ),
@@ -74,6 +78,11 @@ class WaitingRoomApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = context.watch<AuthProvider?>();
+    final Widget homeScreen = (auth == null || auth.isAuthenticated)
+        ? const QueueScreen()
+        : const LoginScreen();
+
     return MaterialApp(
       title: 'Waiting Room',
       debugShowCheckedModeBanner: false,
@@ -81,7 +90,7 @@ class WaitingRoomApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const QueueScreen(),
+      home: homeScreen,
     );
   }
 }
