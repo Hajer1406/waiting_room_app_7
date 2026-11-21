@@ -303,7 +303,7 @@ class _QueueScreenState extends State<QueueScreen> {
               }
               final client = provider.clients[index];
 
-              // Only staff can swipe to delete
+              // Only staff can swipe to delete or click the trash button
               if (isStaff) {
                 return Dismissible(
                   key: Key(client.id),
@@ -315,7 +315,10 @@ class _QueueScreenState extends State<QueueScreen> {
                     child: const Icon(Icons.delete, color: Colors.white),
                   ),
                   onDismissed: (_) => provider.removeClient(client.id),
-                  child: ClientCard(client: client),
+                  child: ClientCard(
+                    client: client,
+                    onDelete: () => provider.removeClient(client.id),
+                  ),
                 );
               }
 
