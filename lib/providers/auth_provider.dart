@@ -101,15 +101,21 @@ class AuthProvider extends ChangeNotifier {
   }
 
   String _cleanErrorMessage(String raw) {
+    if (raw.contains('email rate limit exceeded') || raw.contains('over_email_send_rate_limit')) {
+      return 'Limite d\'emails Supabase atteinte (429). Pour la désactiver : dans Supabase > Auth > Providers > Email, décochez "Confirm email". En attendant, utilisez les boutons Démo ci-dessous.';
+    }
+    if (raw.contains('Email not confirmed')) {
+      return 'Email non confirmé par Supabase. Décochez "Confirm email" dans Supabase (Auth > Providers > Email) pour vous connecter directement sans validation d\'email.';
+    }
     if (raw.contains('Invalid login credentials')) {
-      return 'Email ou mot de passe incorrect.';
+      return 'Email ou mot de passe incorrect. Assurez-vous d\'avoir bien créé ce compte ou d\'avoir le bon mot de passe.';
     }
     if (raw.contains('User already registered')) {
-      return 'Cet email est déjà enregistré.';
+      return 'Cet email est déjà enregistré. Rendez-vous sur l\'onglet "Connexion".';
     }
     if (raw.contains('Password should be at least')) {
       return 'Le mot de passe doit comporter au moins 6 caractères.';
     }
-    return raw.replaceFirst('Exception: ', '');
+    return raw.replaceFirst('Exception: ', '').replaceFirst('AuthApiException: ', '');
   }
 }
